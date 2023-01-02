@@ -1,0 +1,32 @@
+{
+  "name": "ssr-react",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.6.1"
+  },
+  "scripts": {
+    "dev": "npm run build && node server",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
+    "build:ssg": "vite build --outDir dist/static && npm run build:server && node static-site-generation.js",
+    "serve": "npm run build && cross-env NODE_ENV=production node server",
+    "serve:static": "npm run build && npx serve ./dist/static",
+    "debug": "npm run build && node --inspect-brk server"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.26",
+    "@types/react-dom": "^18.0.10",
+    "@vitejs/plugin-react": "^3.0.0",
+    "compression": "^1.7.4",
+    "cross-env": "^7.0.3",
+    "express": "^4.18.2",
+    "serve-static": "^1.15.0",
+    "typescript": "^4.9.4",
+    "vite": "^4.0.3"
+  }
+}
